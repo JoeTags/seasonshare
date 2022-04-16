@@ -1,56 +1,82 @@
-import React from 'react';
+// import React from 'react';
+// import staticData from '.././staticData.js'
 
 
-export default function CreateUser() {
 
-  const [formName, setFormName] = React.useState({firstName: "", lastName: "", email: "", phoneNumber: ""}
-  )
+
+// export default function CreateUser({defaultData, data, handleChange, handleSubmit, formName}) {
+
   
-  console.log(formName)
 
-  function handleChange(event) {
-    
-    setFormName(prevState => {
-      return {
-        ...prevState,
-        [event.target.name]: event.target.value
-      }
-    })
-    
-  }
-  return (
-    <div>
-    <form>
+//   console.log('userComponent', staticData)
   
-    <input 
-      type="text" 
-      placeholder="First Name"
-      onChange={handleChange}
-      name="firstName" 
-      />
+//   // const [formName, setFormName] = React.useState({userId: staticData.length + 1, firstName: "", lastName: "", email: "", phoneNumber: ""}
+//   // )
+  
+  
 
-    <input 
-      type="text" 
-      placeholder="last name"
-      onChange={handleChange}
-      name="lastName" 
-      /> 
-      <input 
-      type="text" 
-      placeholder="Email"
-      onChange={handleChange}
-      name="email" 
-      /> 
-      <input 
-      type="text" 
-      placeholder="Phone Number"
-      onChange={handleChange}
-      name="phoneNumber" 
-      />  
+// //   function handleChange(event) {
+    
+// //     setFormName(prevState => {
+// //       return {
+// //         ...prevState,
+// //         [event.target.name]: event.target.value
+// //       }
+// //     })
+// //   }
+
+
+// //  function handleSubmit(event) {
+// //    event.preventDefault()
+// //   //createNewUser(formName)
+// //   console.log(formName)
+// //   setData.push(formName)
+  
+// //   console.log('def', staticData)
+// //  }
+
+// //  useEffect(() => {
+
+// //  }, [])
+
+
+//   return (
+//     <div>
+//     <form onSubmit={handleSubmit}>
+  
+//     <input 
+//       type="text" 
+//       placeholder="First Name"
+//       onChange={handleChange}
+//       name="firstName"
+//       value={formName.firstName} 
+//       />
+
+//     <input 
+//       type="text" 
+//       placeholder="last name"
+//       onChange={handleChange}
+//       name="lastName"
+//       value={formName.lastName} 
+//       /> 
+//       <input 
+//       type="text" 
+//       placeholder="Email"
+//       onChange={handleChange}
+//       name="email"
+//       value={formName.email} 
+//       /> 
+//       <input 
+//       type="text" 
+//       placeholder="Phone Number"
+//       onChange={handleChange}
+//       name="phoneNumber"
+//       value={formName.phoneNumber} 
+//       />  
     
     
-    <input type="submit" value="Submit" />
-    </form>
-    </div>
-  )
-}
+//     <button>Submit</button>
+//     </form>
+//     </div>
+//   )
+// }
