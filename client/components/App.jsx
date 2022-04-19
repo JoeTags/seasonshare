@@ -1,78 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { nanoid } from 'nanoid';
 import CreateUser from './CreateUser.jsx'
 import EditableRow from './EditableRow.jsx'
 import ReadOnlyRow from './ReadOnlyRow.jsx'
 
 import style from '../.././style.css'
-import staticData  from '.././staticData.js'
-
-
-
-const defaultData = [
-  {
-  id: 1,
-  firstName: "C.J.",
-  lastName: "McCollum",
-  email: "mccollum@pels.net",
-  phoneNumber: "504-432-6039"
-},
-{
-  id: 2,
-  firstName: "Brandon",
-  lastName: "Ingram",
-  email: "ingram@pels.net",
-  phoneNumber: "504-889-9174"
-},
-{
-  id: 3,
-  firstName: "Zion",
-  lastName: "Williamson",
-  email: "williamson@pels.net",
-  phoneNumber: "504-867-5309"
-},
-{
-  id: 4,
-  firstName: "Alvin",
-  lastName: "Kamara",
-  email: "kamara@saints.net",
-  phoneNumber: "504-555-5555"
-},
-{
-  id: 5,
-  firstName: "Demario",
-  lastName: "Davis",
-  email: "davis@saints.net",
-  phoneNumber: "504-231-3255"
-},
-{
-  id: 6,
-  firstName: "Taysom",
-  lastName: "Hill",
-  email: "hill@saints.net",
-  phoneNumber: "504-405-5040"
-},
-];
-
-
-
+import staticData  from '../.././staticData.json'
 
 
 export default function App() {
   
 
-  const [data, setData] = React.useState(defaultData/*() => [...defaultData]*/)
+  const [data, setData] = React.useState(staticData)
   
   const [formName, setFormName] = React.useState({
-    id: "", 
-    firstName: "",
+     id: "", 
+     firstName: "",
      lastName: "", 
      email: "", 
      phoneNumber: ""}
   )
 
   const [editFormData, setEditFormData] = useState({
-    
     firstName: "", 
     lastName: "",
     email: "",
@@ -85,7 +35,7 @@ export default function App() {
   
  
  
-function handleEditFormChange(event){
+const handleEditFormChange = (event) => {
   event.preventDefault();
   
   setEditFormData(prevState => {
@@ -115,9 +65,16 @@ const handleEditFormSubmit = (event) => {
 
   setData(newPlayers);
   setEditPlayerId(null);
+
+  axios.put(`/${editPlayerId}`, {data: editFormData})
+    .then(() => {
+        
+    }).catch((err) => {
+      console.log("error:", err)
+    })
 };
 
-function handleEditClick(event, player){
+const handleEditClick = (event, player) => {
   event.preventDefault();
 
   setEditPlayerId(player.id);
@@ -137,20 +94,28 @@ const handleCancelClick = () => {
   setEditPlayerId(null);
 };
 
-const handleDeleteClick = (playerId) => {
+const handleDeleteClick = (id) => {
   const newPlayers = [...data];
 
-  const index = data.findIndex((player) => player.id === playerId);
+  const index = data.findIndex((player) => player.id === id);
 
   newPlayers.splice(index, 1);
 
   setData(newPlayers);
+
+  axios.delete(`/${id}`)
+     
+      .then(() => {
+       
+      }).catch((err) => {
+        console.log("error:", err)
+      })
 };
 
 
   
 // create User functionality
-  function handleChange(event) {
+  const handleUserFormChange = (event) => {
     
     setFormName(prevState => {
       return {
@@ -162,9 +127,9 @@ const handleDeleteClick = (playerId) => {
   }
 
 
- function handleSubmit(event) {
+ const handleUserFormSubmit = (event) => {
   event.preventDefault()
-  setData(prevState => {
+   setData(prevState => {
     return [...prevState, formName]
   })
   setFormName({
@@ -174,8 +139,13 @@ const handleDeleteClick = (playerId) => {
     email: "", 
     phoneNumber: ""
   })
-  
- }
+    axios.post("/", {data: formName})
+      .then((response) => {
+
+      }).catch((err) => {
+        console.log("error:", err)
+      })
+  }
 
  console.log('form', data)
 
@@ -303,11 +273,9 @@ const useSortableData = (columns, config = null) => {
       </table>
       </form>
       <CreateUser 
-        defaultData={defaultData} 
-        data={data}
         formName={formName} 
-        handleChange={handleChange} 
-        handleSubmit={handleSubmit}
+        handleUserFormChange={handleUserFormChange} 
+        handleUserFormSubmit={handleUserFormSubmit}
       />
       </div>
     )

@@ -1,26 +1,20 @@
 import React from 'react';
-import staticData from '.././staticData.js'
 
 
 
 
-export default function CreateUser({defaultData, data, handleChange, handleSubmit, formName}) {
 
-  
+export default function CreateUser({ handleUserFormChange, handleUserFormSubmit, formName }) {
 
-  console.log('userComponent', staticData)
-  
  
-
-
   return (
     <div className="form-container">
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleUserFormSubmit}>
   
     <input 
       type="text" 
       placeholder="First Name"
-      onChange={handleChange}
+      onChange={handleUserFormChange}
       name="firstName"
       value={formName.firstName} 
       />
@@ -28,21 +22,21 @@ export default function CreateUser({defaultData, data, handleChange, handleSubmi
     <input 
       type="text" 
       placeholder="last name"
-      onChange={handleChange}
+      onChange={handleUserFormChange}
       name="lastName"
       value={formName.lastName} 
       /> 
       <input 
       type="text" 
       placeholder="Email"
-      onChange={handleChange}
+      onChange={handleUserFormChange}
       name="email"
       value={formName.email} 
       /> 
       <input 
       type="text" 
       placeholder="Phone Number"
-      onChange={handleChange}
+      onChange={handleUserFormChange}
       name="phoneNumber"
       value={formName.phoneNumber} 
       />  
